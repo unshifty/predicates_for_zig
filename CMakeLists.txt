@@ -24,9 +24,7 @@ endif()
 install(
     TARGETS ${PROJECT_NAME}
     EXPORT ${PROJECT_NAME}Targets
-    LIBRARY DESTINATION lib
-    INCLUDES
-    DESTINATION include/${PROJECT_NAME})
+    LIBRARY DESTINATION lib)
 
 install(
     EXPORT ${PROJECT_NAME}Targets
