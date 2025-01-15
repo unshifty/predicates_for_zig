@@ -12,8 +12,14 @@ add_library(${PROJECT_NAME} STATIC "${CMAKE_CURRENT_SOURCE_DIR}/predicates.c")
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
                                                   $<INSTALL_INTERFACE:include>)
 
-target_compile_options(${PROJECT_NAME} PRIVATE $<$<NOT:$<C_COMPILER_ID:MSVC>>:-msse4.2 -Wall -Wextra>
-                                               $<$<C_COMPILER_ID:MSVC>:/arch:AVX /W4>)
+if(MSVC)
+    set(_arch "/arch:AVX")
+elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
+    set(_arch "-msse4.2")
+endif()
+
+target_compile_options(${PROJECT_NAME} PRIVATE ${_arch} $<$<NOT:$<C_COMPILER_ID:MSVC>>:-Wall -Wextra>
+                                               $<$<C_COMPILER_ID:MSVC>:/W4>)
 
 if(BUILD_TESTING)
     add_executable(test test.c)
