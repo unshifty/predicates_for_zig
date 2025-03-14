@@ -6,7 +6,7 @@ pub fn build(b: *std.Build) !void {
 
     // Create a library containing the predicates C code.
     const predicates_lib = b.addStaticLibrary(.{
-        .name = "predicates",
+        .name = "predicates_zig",
         .root_source_file = null, // No Zig code in this library
         .target = target,
         .optimize = optimize,
