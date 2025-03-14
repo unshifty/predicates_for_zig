@@ -13,8 +13,9 @@ pub fn build(b: *std.Build) !void {
     });
 
     // Add the predicates C source file.
-    predicates_lib.addCSourceFile(.{
-        .file = .{ .path = "predicates.c" },
+    predicates_lib.addCSourceFiles(.{
+        .root = .{ .path = "" },
+        .files = &.{"predicates.c"},
         .flags = &[_][]const u8{}, // Add compiler flags here, if needed
     });
 
